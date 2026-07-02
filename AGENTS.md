@@ -30,4 +30,7 @@
 No build, test, lint, or dev commands. Served as static HTML.
 
 ## Deploy
-Vercel, Netlify, GitHub Pages, atau static host lainnya.
+- **Repo**: https://github.com/ndadevdev/delprto
+- **Domain**: dellasafitri.ndadev.my.id
+- **Host**: GitHub Pages (CNAME sudah diset)
+- Push ke `master` untuk deploy otomatis.
