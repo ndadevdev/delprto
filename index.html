@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Della Safitri — Portfolio</title>
+	<!-- Tailwind -->
+	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+	<!-- Alpine -->
+	<script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+	<script nomodule src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine-ie11.min.js" defer></script>
+	<!-- AOS -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+	<!-- Custom style -->
+	<link rel="stylesheet" href="css/skilline.css" />
+	<!-- Poppins font -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<style>
+		.rounded-card {
+			border-radius: 20px;
+		}
+		.skill-icon {
+			width: 56px;
+			height: 56px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 16px;
+		}
+		.hover-lift {
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+		.hover-lift:hover {
+			transform: translateY(-6px);
+			box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+		}
+		.gradient-btn {
+			background: linear-gradient(105.5deg, #F48C06 19.57%, #e67e00 78.85%);
+		}
+		.avatar-img {
+			width: 120px;
+			height: 120px;
+			object-fit: cover;
+			border-radius: 50%;
+			border: 4px solid #F48C06;
+		}
+		html { scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; }
+		html::-webkit-scrollbar { display: none; }
+		/* smooth mobile nav */
+		.nav-mobile {
+			max-height: 0;
+			overflow: hidden;
+			transition: max-height 0.3s ease;
+		}
+		.nav-mobile.open {
+			max-height: 500px;
+		}
+	</style>
+</head>
+<body class="antialiased">
+
+	<!-- NAVBAR -->
+	<div x-data="{ open: false }" class="w-full text-gray-700 bg-white shadow-sm sticky top-0 z-50">
+		<div class="flex items-center justify-between max-w-screen-xl px-5 md:px-8 mx-auto py-5 md:py-6">
+			<div class="relative">
+				<a href="#" class="text-lg relative z-50 font-bold tracking-widest text-gray-900 rounded-lg focus:outline-none focus:shadow-outline">Della</a>
+				<svg class="h-11 z-40 absolute -top-2 -left-3" viewBox="0 0 79 79" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M35.2574 2.24264C37.6005 -0.100501 41.3995 -0.100505 43.7426 2.24264L76.7574 35.2574C79.1005 37.6005 79.1005 41.3995 76.7574 43.7426L43.7426 76.7574C41.3995 79.1005 37.6005 79.1005 35.2574 76.7574L2.24264 43.7426C-0.100501 41.3995 -0.100505 37.6005 2.24264 35.2574L35.2574 2.24264Z" fill="#65DAFF"/>
+				</svg>
+			</div>
+			<button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline z-50" @click="open = !open">
+				<svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+					<path x-show="!open" fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+					<path x-show="open" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+				</svg>
+			</button>
+			<nav :class="open ? 'flex' : 'hidden md:flex'" class="fixed md:static inset-x-0 top-0 md:top-auto flex-col md:flex-row md:items-center md:flex-grow pt-20 md:pt-0 pb-4 md:pb-0 md:justify-end bg-white md:bg-transparent shadow-lg md:shadow-none z-40">
+				<a class="px-6 py-3 text-sm bg-transparent rounded-lg md:mt-8 md:ml-4 hover:text-yellow-500 focus:outline-none focus:shadow-outline border-b md:border-0 border-gray-100" href="#" @click="open = false">Beranda</a>
+				<a class="px-6 py-3 text-sm bg-transparent rounded-lg md:mt-8 md:ml-4 hover:text-yellow-500 focus:outline-none focus:shadow-outline border-b md:border-0 border-gray-100" href="#about" @click="open = false">Tentang</a>
+				<a class="px-6 py-3 text-sm bg-transparent rounded-lg md:mt-8 md:ml-4 hover:text-yellow-500 focus:outline-none focus:shadow-outline border-b md:border-0 border-gray-100" href="#skills" @click="open = false">Skill</a>
+				<a class="px-6 py-3 text-sm bg-transparent rounded-lg md:mt-8 md:ml-4 hover:text-yellow-500 focus:outline-none focus:shadow-outline border-b md:border-0 border-gray-100" href="#portfolio" @click="open = false">Portofolio</a>
+				<a class="px-6 py-3 text-sm bg-transparent rounded-lg md:mt-8 md:ml-4 hover:text-yellow-500 focus:outline-none focus:shadow-outline border-b md:border-0 border-gray-100" href="#contact" @click="open = false">Kontak</a>
+				<a class="mx-6 md:mx-0 mt-2 md:mt-8 md:ml-4 px-6 py-2 text-xs md:text-sm text-center gradient-btn text-white rounded-full" href="#contact" @click="open = false">Hubungi Saya</a>
+			</nav>
+		</div>
+		<div x-show="open" class="fixed inset-0 z-30 bg-black opacity-30 md:hidden" @click="open = false"></div>
+	</div>
+
+	<!-- HERO -->
+	<div class="bg-cream">
+		<div class="max-w-screen-xl px-5 md:px-8 mx-auto flex flex-col lg:flex-row items-start pt-6 md:pt-8 lg:pt-16 pb-12 md:pb-16 lg:pb-28">
+			<div id="hero-text" class="flex flex-col w-full lg:w-6/12 justify-center lg:pt-16 items-center lg:items-start text-center lg:text-left mb-6 md:mb-0">
+				<p data-aos="fade-down" data-aos-once="true" class="text-yellow-500 font-semibold text-base md:text-lg mb-2">Halo, selamat datang!</p>
+				<h1 data-aos="fade-right" data-aos-once="true" class="my-4 text-4xl md:text-5xl font-bold leading-tight text-darken">
+					Saya <span class="text-yellow-500">Della Safitri</span>
+				</h1>
+				<p data-aos="fade-down" data-aos-once="true" data-aos-delay="300" class="leading-normal text-lg md:text-xl mb-5 text-gray-600">Mahasiswi Administrasi Kesehatan | Penulis | Pengelola Data</p>
+				<p data-aos="fade-down" data-aos-once="true" data-aos-delay="400" class="leading-relaxed text-gray-500 mb-6 max-w-lg">Berasal dari Boyolali, lahir tahun 2006, dengan semangat belajar dan berkontribusi di bidang administrasi kesehatan, penulisan ilmiah, dan pengelolaan data.</p>
+				<div data-aos="fade-up" data-aos-once="true" data-aos-delay="700" class="w-full flex flex-col sm:flex-row items-center justify-center lg:justify-start sm:space-x-4 space-y-4 sm:space-y-0">
+					<a href="#portfolio" class="w-full sm:w-auto text-center gradient-btn text-white text-base md:text-lg font-semibold rounded-full py-3 md:py-4 px-8 md:px-10 focus:outline-none transform transition hover:scale-110 duration-300 ease-in-out">
+						Lihat Portofolio
+					</a>
+					<a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center space-x-3 focus:outline-none transform transition hover:scale-110 duration-300 ease-in-out text-darken font-medium">
+						<div class="bg-white w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-md flex-shrink-0">
+							<svg class="w-4 h-4 md:w-5 md:h-5 ml-1" viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M22.5751 12.8097C23.2212 13.1983 23.2212 14.135 22.5751 14.5236L1.51538 27.1891C0.848878 27.5899 5.91205e-07 27.1099 6.25202e-07 26.3321L1.73245e-06 1.00123C1.76645e-06 0.223477 0.848877 -0.256572 1.51538 0.14427L22.5751 12.8097Z" fill="#F48C06"/>
+							</svg>
+						</div>
+						<span>Hubungi Saya</span>
+					</a>
+				</div>
+			</div>
+			<div class="w-full lg:w-6/12 relative lg:mt-16" id="hero-img">
+				<div data-aos="fade-up" data-aos-once="true" class="flex items-center justify-center py-6 md:py-10 lg:py-0">
+					<div class="relative w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden shadow-xl">
+						<img src="img/hero.png" alt="Della Safitri" class="w-full h-full object-cover" style="object-position: 50% 40%">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="hero-wave" class="text-white -mt-10 sm:-mt-16 md:-mt-24 lg:-mt-36 z-40 relative">
+			<svg class="xl:h-40 xl:w-full" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+				<path d="M600,112.77C268.63,112.77,0,65.52,0,7.23V120H1200V7.23C1200,65.52,931.37,112.77,600,112.77Z" fill="currentColor"></path>
+			</svg>
+			<div class="bg-white w-full h-12 md:h-20 -mt-px"></div>
+		</div>
+	</div>
+
+	<!-- MAIN CONTAINER -->
+	<div class="container px-5 md:px-8 mx-auto max-w-screen-xl text-gray-700 overflow-x-hidden">
+
+		<!-- ABOUT -->
+		<div id="about" class="mt-8 md:mt-10 scroll-mt-20">
+			<div data-aos="flip-down" class="text-center max-w-screen-md mx-auto">
+				<h1 class="text-2xl md:text-3xl font-bold mb-4">Tentang <span class="text-yellow-500">Saya</span></h1>
+				<div class="w-16 md:w-20 h-1 bg-yellow-500 mx-auto rounded-full mb-6"></div>
+			</div>
+			<div class="flex flex-col md:flex-row items-center md:space-x-10 mt-8">
+				<div data-aos="fade-right" class="md:w-5/12 flex justify-center mb-6 md:mb-0">
+					<div class="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full bg-cream shadow-xl flex items-center justify-center overflow-hidden">
+						<svg class="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+					</div>
+				</div>
+				<div data-aos="fade-left" class="md:w-7/12 text-center md:text-left">
+					<h2 class="text-xl md:text-2xl font-semibold text-darken mb-4">Della Safitri</h2>
+					<p class="text-gray-500 mb-3 text-sm md:text-base">Mahasiswi Administrasi Kesehatan di Universitas Kusuma Husada Surakarta. Lulusan MAN 2 Boyolali. Berpengalaman dalam pelayanan pelanggan di Stand Mojosongo dan Outlet Kusuma Sari Paragon.</p>
+					<p class="text-gray-500 mb-4 text-sm md:text-base">Memiliki keahlian di bidang administrasi perkantoran, pengelolaan data (Excel, Word), penulisan artikel dan jurnal ilmiah, serta keterampilan memasak dan menjahit.</p>
+					<div class="grid grid-cols-2 gap-2 md:gap-3 text-xs md:text-sm">
+						<div><span class="font-semibold text-darken">Asal:</span> Boyolali</div>
+						<div><span class="font-semibold text-darken">Lahir:</span> 2006</div>
+						<div><span class="font-semibold text-darken">Pendidikan:</span> Administrasi Kesehatan</div>
+						<div><span class="font-semibold text-darken">Email:</span> della@gmail.com</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- SKILLS -->
+		<div id="skills" class="mt-20 md:mt-28 scroll-mt-20">
+			<div data-aos="flip-up" class="max-w-xl mx-auto text-center">
+				<h1 class="font-bold text-darken my-3 text-2xl md:text-3xl">Keahlian <span class="text-yellow-500">Saya</span></h1>
+				<div class="w-16 md:w-20 h-1 bg-yellow-500 mx-auto rounded-full mb-5"></div>
+				<p class="leading-relaxed text-gray-500 text-sm md:text-base">Berbagai keterampilan yang saya miliki, dikembangkan melalui pendidikan dan pengalaman.</p>
+			</div>
+			<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mt-10 md:mt-12">
+				<div data-aos="fade-up" class="bg-white shadow-lg p-6 md:p-8 text-center rounded-card hover-lift">
+					<div style="background: #5B72EE;" class="skill-icon mx-auto shadow-lg mb-5">
+						<svg class="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+					</div>
+					<h1 class="font-semibold text-lg md:text-xl mb-3 text-darken">Administrasi Kesehatan</h1>
+					<p class="text-gray-500 text-xs md:text-sm">Mengelola data administrasi kesehatan, pencatatan rekam medis, dan dokumentasi perkantoran.</p>
+				</div>
+				<div data-aos="fade-up" data-aos-delay="100" class="bg-white shadow-lg p-6 md:p-8 text-center rounded-card hover-lift">
+					<div style="background: #F48C06;" class="skill-icon mx-auto shadow-lg mb-5">
+						<svg class="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+					</div>
+					<h1 class="font-semibold text-lg md:text-xl mb-3 text-darken">Microsoft Office</h1>
+					<p class="text-gray-500 text-xs md:text-sm">Mahir menggunakan Excel untuk pengolahan data, Word untuk dokumentasi, dan PowerPoint untuk presentasi.</p>
+				</div>
+				<div data-aos="fade-up" data-aos-delay="200" class="bg-white shadow-lg p-6 md:p-8 text-center rounded-card hover-lift">
+					<div style="background: #29B9E7;" class="skill-icon mx-auto shadow-lg mb-5">
+						<svg class="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+					</div>
+					<h1 class="font-semibold text-lg md:text-xl mb-3 text-darken">Penulisan & Jurnal</h1>
+					<p class="text-gray-500 text-xs md:text-sm">Berpengalaman menulis artikel, jurnal ilmiah, dan laporan akademik dengan struktur yang jelas dan informatif.</p>
+				</div>
+				<div data-aos="fade-up" data-aos-delay="300" class="bg-white shadow-lg p-6 md:p-8 text-center rounded-card hover-lift">
+					<div style="background: #F3627C;" class="skill-icon mx-auto shadow-lg mb-5">
+						<svg class="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+					</div>
+					<h1 class="font-semibold text-lg md:text-xl mb-3 text-darken">Memasak & Menjahit</h1>
+					<p class="text-gray-500 text-xs md:text-sm">Terampil memasak hidangan tradisional dan menjahit berbagai model pakaian dan aksesoris.</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- PENGALAMAN & PENDIDIKAN -->
+		<div class="mt-20 md:mt-28">
+			<div data-aos="flip-down" class="text-center max-w-screen-md mx-auto">
+				<h1 class="text-2xl md:text-3xl font-bold mb-4">Pengalaman & <span class="text-yellow-500">Pendidikan</span></h1>
+				<div class="w-16 md:w-20 h-1 bg-yellow-500 mx-auto rounded-full mb-6"></div>
+			</div>
+			<div class="flex flex-col md:flex-row md:space-x-10 mt-8 md:mt-10">
+				<div data-aos="fade-right" class="md:w-6/12 mb-10 md:mb-0">
+					<h2 class="text-xl md:text-2xl font-semibold text-darken mb-6 flex items-center">
+						<svg class="w-5 h-5 md:w-6 md:h-6 mr-2 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+						Pengalaman Kerja
+					</h2>
+					<div class="space-y-6">
+						<div class="flex space-x-4">
+							<div class="flex flex-col items-center">
+								<div class="w-3 h-3 md:w-4 md:h-4 bg-yellow-500 rounded-full flex-shrink-0"></div>
+								<div class="w-0.5 h-full bg-gray-300"></div>
+							</div>
+							<div class="pb-6">
+								<h3 class="font-semibold text-darken text-sm md:text-base">Stand Mojosongo</h3>
+								<p class="text-xs md:text-sm text-yellow-500">Staff Pelayanan</p>
+								<p class="text-xs md:text-sm text-gray-400 mt-1">Melayani pelanggan, mengelola transaksi, dan menjaga kebersihan area kerja.</p>
+							</div>
+						</div>
+						<div class="flex space-x-4">
+							<div class="flex flex-col items-center">
+								<div class="w-3 h-3 md:w-4 md:h-4 bg-yellow-500 rounded-full flex-shrink-0"></div>
+								<div class="w-0.5 h-full bg-gray-300"></div>
+							</div>
+							<div>
+								<h3 class="font-semibold text-darken text-sm md:text-base">Outlet Kusuma Sari Paragon</h3>
+								<p class="text-xs md:text-sm text-yellow-500">Staff Outlet</p>
+								<p class="text-xs md:text-sm text-gray-400 mt-1">Bertanggung jawab atas pelayanan pelanggan, administrasi outlet, dan stok barang.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div data-aos="fade-left" class="md:w-6/12">
+					<h2 class="text-xl md:text-2xl font-semibold text-darken mb-6 flex items-center">
+						<svg class="w-5 h-5 md:w-6 md:h-6 mr-2 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 7l-9-5 9-5 9 5-9 5zm0-7l-9-5 9-5 9 5-9 5z"/></svg>
+						Pendidikan
+					</h2>
+					<div class="space-y-6">
+						<div class="flex space-x-4">
+							<div class="flex flex-col items-center">
+								<div class="w-3 h-3 md:w-4 md:h-4 bg-blue-500 rounded-full flex-shrink-0"></div>
+								<div class="w-0.5 h-full bg-gray-300"></div>
+							</div>
+							<div class="pb-6">
+								<h3 class="font-semibold text-darken text-sm md:text-base">Universitas Kusuma Husada Surakarta</h3>
+								<p class="text-xs md:text-sm text-blue-500">Administrasi Kesehatan — Sekarang</p>
+								<p class="text-xs md:text-sm text-gray-400 mt-1">Menempuh pendidikan di bidang Administrasi Kesehatan, fokus pada manajemen data dan pelayanan kesehatan.</p>
+							</div>
+						</div>
+						<div class="flex space-x-4">
+							<div class="flex flex-col items-center">
+								<div class="w-3 h-3 md:w-4 md:h-4 bg-blue-500 rounded-full flex-shrink-0"></div>
+							</div>
+							<div>
+								<h3 class="font-semibold text-darken text-sm md:text-base">MAN 2 Boyolali</h3>
+								<p class="text-xs md:text-sm text-blue-500">SMA — Lulus</p>
+								<p class="text-xs md:text-sm text-gray-400 mt-1">Pendidikan menengah atas dengan dasar pengetahuan yang kuat untuk melanjutkan studi.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- PORTOFOLIO -->
+		<div id="portfolio" class="mt-20 md:mt-28 scroll-mt-20">
+			<div data-aos="flip-up" class="text-center max-w-screen-md mx-auto">
+				<h1 class="text-2xl md:text-3xl font-bold mb-4">Portofolio <span class="text-yellow-500">Proyek</span></h1>
+				<div class="w-16 md:w-20 h-1 bg-yellow-500 mx-auto rounded-full mb-5"></div>
+				<p class="text-gray-500 mb-6 md:mb-8 text-sm md:text-base">Beberapa karya dan proyek yang pernah saya buat.</p>
+			</div>
+			<div class="grid md:grid-cols-2 gap-6 md:gap-8">
+				<div data-aos="fade-up" class="bg-white shadow-lg rounded-card overflow-hidden hover-lift">
+					<div class="h-36 md:h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+						<svg class="w-12 h-12 md:w-16 md:h-16 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+					</div>
+					<div class="p-5 md:p-6">
+						<span class="text-xs font-semibold text-yellow-500 bg-yellow-100 px-3 py-1 rounded-full">Artikel</span>
+						<h1 class="font-semibold text-lg md:text-xl text-darken mt-3 mb-2">Artikel Kesehatan</h1>
+						<p class="text-gray-500 text-xs md:text-sm">Artikel tentang pola hidup sehat, gizi seimbang, dan pentingnya administrasi dalam pelayanan kesehatan.</p>
+					</div>
+				</div>
+				<div data-aos="fade-up" data-aos-delay="100" class="bg-white shadow-lg rounded-card overflow-hidden hover-lift">
+					<div class="h-36 md:h-48 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+						<svg class="w-12 h-12 md:w-16 md:h-16 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+					</div>
+					<div class="p-5 md:p-6">
+						<span class="text-xs font-semibold text-purple-500 bg-purple-100 px-3 py-1 rounded-full">Jurnal</span>
+						<h1 class="font-semibold text-lg md:text-xl text-darken mt-3 mb-2">Jurnal Ilmiah</h1>
+						<p class="text-gray-500 text-xs md:text-sm">Penulisan jurnal ilmiah tentang topik-topik di bidang kesehatan dan administrasi dengan metodologi penelitian.</p>
+					</div>
+				</div>
+				<div data-aos="fade-up" data-aos-delay="200" class="bg-white shadow-lg rounded-card overflow-hidden hover-lift">
+					<div class="h-36 md:h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+						<svg class="w-12 h-12 md:w-16 md:h-16 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+					</div>
+					<div class="p-5 md:p-6">
+						<span class="text-xs font-semibold text-green-500 bg-green-100 px-3 py-1 rounded-full">Data</span>
+						<h1 class="font-semibold text-lg md:text-xl text-darken mt-3 mb-2">Proyek Excel</h1>
+						<p class="text-gray-500 text-xs md:text-sm">Pengolahan data menggunakan Microsoft Excel, termasuk pembuatan tabel, grafik, dan analisis data kesehatan.</p>
+					</div>
+				</div>
+				<div data-aos="fade-up" data-aos-delay="300" class="bg-white shadow-lg rounded-card overflow-hidden hover-lift">
+					<div class="h-36 md:h-48 bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center">
+						<svg class="w-12 h-12 md:w-16 md:h-16 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"/></svg>
+					</div>
+					<div class="p-5 md:p-6">
+						<span class="text-xs font-semibold text-pink-500 bg-pink-100 px-3 py-1 rounded-full">Laporan</span>
+						<h1 class="font-semibold text-lg md:text-xl text-darken mt-3 mb-2">Laporan PKL</h1>
+						<p class="text-gray-500 text-xs md:text-sm">Laporan Praktek Kerja Lapangan di bidang administrasi kesehatan, mencakup observasi dan dokumentasi kegiatan.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- KONTAK -->
+		<div id="contact" class="mt-20 md:mt-28 scroll-mt-20">
+			<div data-aos="flip-down" class="text-center max-w-screen-md mx-auto">
+				<h1 class="text-2xl md:text-3xl font-bold mb-4">Hubungi <span class="text-yellow-500">Saya</span></h1>
+				<div class="w-16 md:w-20 h-1 bg-yellow-500 mx-auto rounded-full mb-5"></div>
+				<p class="text-gray-500 mb-8 md:mb-10 text-sm md:text-base">Tertarik bekerja sama? Silakan hubungi saya melalui email atau media sosial berikut.</p>
+			</div>
+			<div class="flex flex-col md:flex-row items-start md:space-x-10 max-w-4xl mx-auto">
+				<div data-aos="fade-right" class="md:w-6/12 w-full space-y-4 md:space-y-6 mb-8 md:mb-0">
+					<div class="flex items-center space-x-4 bg-white shadow-md p-4 md:p-5 rounded-card">
+						<div style="background: #5B72EE;" class="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center flex-shrink-0">
+							<svg class="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+						</div>
+						<div>
+							<h3 class="font-semibold text-darken text-sm md:text-base">Email</h3>
+							<p class="text-gray-500 text-xs md:text-sm">della@gmail.com</p>
+						</div>
+					</div>
+					<div class="flex items-center space-x-4 bg-white shadow-md p-4 md:p-5 rounded-card">
+						<div style="background: #F48C06;" class="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center flex-shrink-0">
+							<svg class="w-4 h-4 md:w-5 md:h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+						</div>
+						<div>
+							<h3 class="font-semibold text-darken text-sm md:text-base">LinkedIn</h3>
+							<p class="text-gray-500 text-xs md:text-sm">linkedin.com/in/dellasafitri</p>
+						</div>
+					</div>
+					<div class="flex items-center space-x-4 bg-white shadow-md p-4 md:p-5 rounded-card">
+						<div style="background: #29B9E7;" class="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center flex-shrink-0">
+							<svg class="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+						</div>
+						<div>
+							<h3 class="font-semibold text-darken text-sm md:text-base">Lokasi</h3>
+							<p class="text-gray-500 text-xs md:text-sm">Boyolali, Jawa Tengah</p>
+						</div>
+					</div>
+				</div>
+				<div data-aos="fade-left" class="md:w-6/12 w-full bg-white shadow-lg rounded-card p-6 md:p-8">
+					<h3 class="text-lg md:text-xl font-semibold text-darken mb-4">Kirim Pesan</h3>
+					<form action="mailto:della@gmail.com" method="post" enctype="text/plain">
+						<div class="mb-4">
+							<input type="text" placeholder="Nama" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-yellow-500 focus:outline-none text-sm">
+						</div>
+						<div class="mb-4">
+							<input type="email" placeholder="Email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-yellow-500 focus:outline-none text-sm">
+						</div>
+						<div class="mb-4">
+							<textarea rows="4" placeholder="Pesan" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-yellow-500 focus:outline-none text-sm"></textarea>
+						</div>
+						<button type="submit" class="w-full gradient-btn text-white font-semibold py-3 rounded-full transform transition hover:scale-105 duration-300 ease-in-out">Kirim Pesan</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- END CONTAINER -->
+
+	<!-- FOOTER -->
+	<footer class="mt-20 md:mt-32" style="background-color: rgba(37, 38, 65, 1);">
+		<div class="max-w-4xl mx-auto px-5 md:px-8">
+			<div class="flex flex-col sm:flex-row py-10 md:py-12 justify-center text-white items-center">
+				<div class="relative">
+					<h1 class="font-bold text-lg md:text-xl pr-5 relative z-50">Della Safitri</h1>
+					<svg class="w-10 h-10 md:w-11 md:h-11 absolute -top-2 -left-3 z-40" viewBox="0 0 79 79" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M35.9645 2.94975C37.9171 0.997129 41.0829 0.997127 43.0355 2.94975L76.0502 35.9645C78.0029 37.9171 78.0029 41.0829 76.0503 43.0355L43.0355 76.0502C41.0829 78.0029 37.9171 78.0029 35.9645 76.0503L2.94975 43.0355C0.997129 41.0829 0.997127 37.9171 2.94975 35.9645L35.9645 2.94975Z" stroke="#26C1F2" stroke-width="2"/>
+					</svg>
+				</div>
+				<span class="sm:border-l border-gray-500 text-xs md:text-sm pl-0 sm:pl-5 py-2 font-semibold mt-2 sm:mt-0">Mahasiswi Administrasi Kesehatan</span>
+			</div>
+			<div class="text-center pb-8 md:pb-10">
+				<div class="flex items-center text-gray-400 text-xs md:text-sm justify-center flex-wrap space-x-4 md:space-x-6 mb-6">
+					<a href="#" class="hover:text-white">Beranda</a>
+					<a href="#about" class="hover:text-white">Tentang</a>
+					<a href="#skills" class="hover:text-white">Skill</a>
+					<a href="#portfolio" class="hover:text-white">Portofolio</a>
+					<a href="#contact" class="hover:text-white">Kontak</a>
+				</div>
+				<div class="text-center text-white">
+					<p class="text-gray-400 text-xs md:text-sm">&copy; 2026 Della Safitri. All rights reserved.</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- AOS init -->
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+	<script>
+		AOS.init();
+
+		// Parallax hero (desktop only)
+		window.addEventListener('scroll', function() {
+			if (window.innerWidth < 768) return;
+			const scrollY = window.pageYOffset;
+			const heroImg = document.querySelector('#hero-img');
+			const heroText = document.querySelector('#hero-text');
+			if (heroImg) {
+				heroImg.style.transform = 'translateY(' + (scrollY * 0.15) + 'px)';
+			}
+			if (heroText) {
+				heroText.style.transform = 'translateY(' + (-scrollY * 0.05) + 'px)';
+			}
+		});
+	</script>
+</body>
+</html>
